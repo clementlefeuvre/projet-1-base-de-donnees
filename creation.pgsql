@@ -33,6 +33,11 @@ DROP TABLE IF EXISTS item;
 DROP TYPE IF EXISTS genre;
 DROP TYPE IF EXISTS statut;
 
+CREATE TYPE statut AS ENUM(
+	'invité',
+	'payant'
+);
+
 CREATE TYPE genre AS ENUM(
   'femme_cis',
   'homme_cis',
@@ -44,22 +49,20 @@ CREATE TYPE genre AS ENUM(
   'autre'
 );
 
-CREATE TYPE statut AS ENUM(
-	'invité',
-	'payant'
-);
 
 
 CREATE TABLE joueur(
 	alias 				varchar(32),
 	courriel 			varchar(128) 	UNIQUE NOT NULL,
 	mot_de_passe		varchar(32) 	NOT NULL,
-	genre				genre,
-	date_inscription	date			NOT NULL,
-	date_naissance		date,
+	genre				genre 			DEFAULT NULL,
+	date_inscription	date			NOT NULL			DEFAULT NOW(),
+	date_naissance		date			DEFAULT NULL,
 	statut				statut			NOT NULL,
 	
-	CONSTRAINT pk_joueur_alias PRIMARY KEY(alias)
+	CONSTRAINT pk_joueur_alias PRIMARY KEY(alias),
+	CONSTRAINT cc_joueur_date_inscr CHECK(date_inscription > '2023-01-01'),
+	CONSTRAINT cc_joueur_date_naiss CHECK(date_naissance > '1900-01-01' AND (date_naissance <= CURRENT_DATE - '13 YEARS'::INTERVAL))
 );
 
 CREATE TABLE item(
@@ -70,23 +73,29 @@ CREATE TABLE item(
 	moX					decimal(9,2)	DEFAULT(100.0) NOT NULL,
 	jeu					char(6)			NOT NULL,
 	
-	CONSTRAINT pk_item_sigle PRIMARY KEY(sigle)
+	CONSTRAINT pk_item_sigle PRIMARY KEY(sigle),
+	CONSTRAINT cc_item_sigle CHECK(sigle LIKE 'I...'),
+	CONSTRAINT cc_item_probabilite CHECK(probabilite > 0 AND probabilite < 1),
+	CONSTRAINT cc_item_mox CHECK(moX >= 1 AND moX <= 1000000)
 );
 
 CREATE TABLE activite(
 	id					integer,
 	joueur				varchar(32)		NOT NULL,
 	date_debut			date			NOT NULL,
-	dureé				integer			NOT NULL,
+	duree				integer			NOT NULL,
 	
-	CONSTRAINT pk_activite_id PRIMARY KEY(id)
+	CONSTRAINT pk_activite_id PRIMARY KEY(id),
+	CONSTRAINT cc_activite_duree CHECK(duree > 0)
 );
 CREATE TABLE capsule_activite(
 	id			integer,
 	avatar		varchar(32)		NOT NULL,
 	activite	integer			NOT NULL,
-	jeu			char(5)			NOT NULL,
-	duree		integer			NOT NULL
+	jeu			char(6)			NOT NULL,
+	duree		integer			NOT NULL,
+	
+	CONSTRAINT cc_caps_acti_duree CHECK(duree > 0)
 );
 
 CREATE TABLE avatar(
@@ -99,7 +108,10 @@ CREATE TABLE avatar(
     joueur             varchar(32),
     actif            	bool            	NOT NULL    DEFAULT false,
 
-    CONSTRAINT pk_avatar_nom PRIMARY KEY(nom)
+    CONSTRAINT pk_avatar_nom PRIMARY KEY(nom),
+	CONSTRAINT cc_avatar_nom CHECK(nom ILIKE '...%'),
+	CONSTRAINT cc_avatar_mox CHECK(moX > 1 AND moX < 1000000)
+	
 );
 
 CREATE TABLE phrase(
@@ -116,35 +128,43 @@ CREATE TABLE jeu(
     sigle         	char(6),
     description 	varchar(2048),
 	
-	CONSTRAINT pk_jeu_sigle PRIMARY KEY(sigle)
+	CONSTRAINT pk_jeu_sigle PRIMARY KEY(sigle),
+	CONSTRAINT cc_jeu_nom CHECK(nom ILIKE '_..%'),
+	CONSTRAINT cc_jeu_sigle CHECK(sigle ILIKE '_.....')
 );
 
 CREATE TABLE habilete(
     nom                	varchar(32)            	NOT NULL     UNIQUE,
     sigle             	char(3)             	NOT NULL,
-    max_energie     	DECIMAL(8,3)        	NOT NULL     DEFAULT 100.0,
+    max_energie     	DECIMAL(7,3)        	NOT NULL     DEFAULT 100.0,
     coef1             	double precision     	NOT NULL,
     coef2             	double precision,
     coef3             	double precision,
     description        	varchar(1024)         	NOT NULL,
     jeu                	char(6),
 
-    CONSTRAINT pk_habilete_sigle PRIMARY KEY(sigle)
+    CONSTRAINT pk_habilete_sigle PRIMARY KEY(sigle),
+	CONSTRAINT cc_habilete_sigle CHECK(sigle LIKE '..P'),
+	CONSTRAINT cc_habilete_max_energie CHECK(max_energie >= 1 AND max_energie <= 1000)
 );
 
 
 CREATE TABLE habilete_avatar(
     avatar             	varchar(32),
     habilete        	char(3),
-    date_obtention    	date             	NOT NULL,
-    niveau             	integer            	DEFAULT 1
+    date_obtention    	date             	NOT NULL	DEFAULT NOW(),
+    niveau             	integer            	NOT NULL 	DEFAULT 1,
+	
+	CONSTRAINT cc_habilete_avatar_niveau CHECK(niveau >= 1 AND niveau <= 100)
 );
 	
 CREATE TABLE item_avatar(
     avatar             	varchar(32),
     item        		char(3),
-    date_obtention    	date             NOT NULL,
-    quantite            integer          DEFAULT 1
+    date_obtention    	date             NOT NULL	DEFAULT NOW(),
+    quantite            integer          NOT NULL 	DEFAULT 1,
+	
+	CONSTRAINT cc_item_avatar_qt CHECK(quantite >= 1 AND quantite <= 1000)
 );
 
 
