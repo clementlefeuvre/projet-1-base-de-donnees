@@ -1,6 +1,7 @@
 SELECT * FROM joueur;
 SELECT * FROM avatar;
 
+
 INSERT INTO joueur (alias, courriel, mot_de_passe, genre, date_inscription, date_naissance, statut)
 VALUES ('alfonso *', 'carlo17@gmail.com', 'xxgzuqta$', 'homme_cis', now(), '1997-06-20', 'payant'),
 		('Olivier', 'simOli@gmail.com','qwerty', 'autre', now(), '2007-05-27', 'payant'),
@@ -18,12 +19,12 @@ VALUES ('Aang *', x'FFD700'::int,x'FFA500'::int, x'000FF'::int, now(), 50000, 'a
 INSERT INTO jeu (nom, sigle, description)
 VALUES  ('Racing', 'ga0001', 'Jeu de course'),
 		('Kombat', 'ga0002', 'Jeu de combat'),
-		('Tenis', 'ga0002', 'Jeu de tennis');
+		('Tenis', 'ga0003', 'Jeu de tennis');
 		
-INSERT INTO habilete (nom, sigle(3), max_energie, coef1, coef2, coef3, description, jeu)
+INSERT INTO habilete (nom, sigle, max_energie, coef1, coef2, coef3, description, jeu)
 VALUES  ('Invincibilité_temporaire', '001', 105.301, 10.90, 40.30, 20.76, 'Devient invincible temporairement', 'ga0001' ),
-		('RAGE', '002', 233.333, 10.33,20.33,33.33,'Devient plus fort temporairement', 'ga002'),
-		('slow_motion', '003', 322.232, 11.11,22.22,33.33, 'Ralentie le temp temporairement', 'ga003');
+		('RAGE', '002', 233.333, 10.33,20.33,33.33,'Devient plus fort temporairement', 'ga0002'),
+		('slow_motion', '003', 322.232, 11.11,22.22,33.33, 'Ralentie le temp temporairement', 'ga0003');
 		
 -- INSERT INTO item (nom, sigle, probabilite, desvription, mox, jeu)
 		
