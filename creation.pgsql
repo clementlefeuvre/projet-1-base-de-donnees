@@ -74,7 +74,7 @@ CREATE TABLE item(
 	jeu					char(6)			NOT NULL,
 	
 	CONSTRAINT pk_item_sigle PRIMARY KEY(sigle),
-	CONSTRAINT cc_item_sigle CHECK(sigle LIKE 'I...'),
+	CONSTRAINT cc_item_sigle CHECK(sigle LIKE 'I___'),
 	CONSTRAINT cc_item_probabilite CHECK(probabilite > 0 AND probabilite < 1),
 	CONSTRAINT cc_item_mox CHECK(moX >= 1 AND moX <= 1000000)
 );
@@ -160,7 +160,7 @@ CREATE TABLE habilete_avatar(
 	
 CREATE TABLE item_avatar(
     avatar             	varchar(32),
-    item        		char(3),
+    item        		char(4),
     date_obtention    	date             NOT NULL	DEFAULT NOW(),
     quantite            integer          NOT NULL 	DEFAULT 1,
 	

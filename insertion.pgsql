@@ -28,18 +28,18 @@ VALUES  ('Racing', 'ga0001', 'Jeu de course'),
 		('Tenis', 'ga0003', 'Jeu de tennis');
 		
 INSERT INTO habilete (nom, sigle, max_energie, coef1, coef2, coef3, description, jeu)
-VALUES  ('Invincibilité_temporaire_P', '001', 105.301, 10.90, 40.30, 20.76, 'Devient invincible temporairement', 'ga0001' ),
-		('RAGE_P', '002', 233.333, 10.33,20.33,33.33,'Devient plus fort temporairement', 'ga0002'),
-		('slow_motion_P', '003', 322.232, 11.11,22.22,33.33, 'Ralentie le temp temporairement', 'ga0003');
+VALUES  ('Invincibilité_temporaire', '01P', 105.301, 10.90, 40.30, 20.76, 'Devient invincible temporairement', 'ga0001' ),
+		('RAGE_P', '02P',233.333, 10.33,20.33,33.33,'Devient plus fort temporairement', 'ga0002'),
+		('slow_motion_P', '03P',322.232, 11.11,22.22,33.33, 'Ralentie le temp temporairement', 'ga0003');
 		
 INSERT INTO item (nom, sigle, probabilite, description, mox, jeu)
-VALUES  ('Propulseur', '001', 0.05, 'augmente la vitesse du joueur', 10000, 'ga0001'),
-		('Épé', '002', 0.09, 'augmente les dégats du joueur', 5000, 'ga0002'),
-		('Raquette en or', '003', 0.001, 'augmente la valeur des objet vendu', 100000, 'ga0003'),
-		('Boules de feu', '004', 0.030, 'Le joueur peut lancer des boules de feu', 10000, 'ga0002'),
-		('Spike ball', '005', 0.020, 'Blesse le joueur lors de son obtention', 1, 'ga0003');
+VALUES  ('Propulseur', 'I001', 0.05, 'augmente la vitesse du joueur', 10000, 'ga0001'),
+		('Épé', 'I002', 0.09, 'augmente les dégats du joueur', 5000, 'ga0002'),
+		('Raquette en or', 'I003', 0.01, 'augmente la valeur des objet vendu', 100000, 'ga0003'),
+		('Boules de feu', 'I004', 0.30, 'Le joueur peut lancer des boules de feu', 10000, 'ga0002'),
+		('Spike ball', 'I005', 0.20, 'Blesse le joueur lors de son obtention', 1, 'ga0003');
 		
-INSERT INTO activite(id,joueur,date_debut,dureé)
+INSERT INTO activite(id,joueur,date_debut,duree)
 VALUES  (01, 'alfonso *', '2026-01-23', 500),
 		(02, 'alfonso *', '2026-01-24', 500),
 		(03, 'alfonso *', '2026-01-25', 500),
@@ -69,14 +69,14 @@ VALUES  (01, 01,'Aang *', 'ga0003', 250),
 		(08, 07,'clem', 'ga0003', 300);
 		
 INSERT INTO habilete_avatar (avatar, habilete, date_obtention, niveau)
-VALUES  ('Aang *', '001', now(), 1),
-		('clem', '002',now(), 1),
-		('Iroh', '003', now(), 1);
+VALUES  ('Aang *', '01P',now(), 1),
+		('clem', '02P',now(), 1),
+		('Iroh', '03P',now(), 1);
 		
 INSERT INTO item_avatar (avatar, item, date_obtention, quantite)
-VALUES  ('Aang *', '001', now(), 1),
-		('Carlos Alfonso', '004',now(), 1),
-		('Iroh', '005', now(), 1);
+VALUES  ('Aang *', 'I001', now(), 1),
+		('Carlos Alfonso', 'I004',now(), 1),
+		('Iroh', 'I005', now(), 1);
 		
 INSERT INTO phrase (id, contenu, avatar)
 VALUES  (1,'yip yip!','Aang *'),
