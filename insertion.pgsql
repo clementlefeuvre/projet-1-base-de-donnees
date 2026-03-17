@@ -19,7 +19,7 @@ VALUES ('Aang *', x'FFD700'::int,x'FFA500'::int, x'000FF'::int, now(), 50000, 'a
  	   ('Roku', x'8B0000'::int , x'DC143C'::int, x'B22222'::int, now(), 50000, 'alfonso *', false),
 	   ('Zuko', x'D0F0C0'::int , x'DC143C'::int, x'B22222'::int, now(), 50000, 'alfonso *', false),
 	   ('Iroh', x'D0F0C0'::int , x'DC143C'::int, x'B22222'::int, now(), 5, 'Olivier', true),
-	   ('Carlos Alfonso', x'9BBB5F'::int, x'74A12E'::int,x'91B500'::int, now(), 5000000,'Jacob', true),
+	   ('Carlos Alfonso', x'9BBB5F'::int, x'74A12E'::int,x'91B500'::int, now(), 5000,'Jacob', true),
 	   ('clem', x'000FF'::int, x'74A12E'::int,x'B22222'::int, now(), 500000, 'Clément', true);
 	   
 INSERT INTO jeu (nom, sigle, description)
