@@ -109,7 +109,7 @@ CREATE TABLE avatar(
     actif            	bool            	NOT NULL    DEFAULT false,
 
     CONSTRAINT pk_avatar_nom PRIMARY KEY(nom),
-	CONSTRAINT cc_avatar_nom CHECK(nom ILIKE '...%'),
+	CONSTRAINT cc_avatar_nom CHECK(nom ~* '^...'),
 	CONSTRAINT cc_avatar_mox CHECK(moX > 1 AND moX < 1000000)
 	
 );
@@ -129,8 +129,8 @@ CREATE TABLE jeu(
     description 	varchar(2048),
 	
 	CONSTRAINT pk_jeu_sigle PRIMARY KEY(sigle),
-	CONSTRAINT cc_jeu_nom CHECK(nom ILIKE '_..%'),
-	CONSTRAINT cc_jeu_sigle CHECK(sigle ILIKE '_.....')
+	CONSTRAINT cc_jeu_nom CHECK(nom ~* '^[a-z].{1,}'),
+	CONSTRAINT cc_jeu_sigle CHECK(sigle ~* '^[a-z].....')
 );
 
 CREATE TABLE habilete(
@@ -144,7 +144,7 @@ CREATE TABLE habilete(
     jeu                	char(6),
 
     CONSTRAINT pk_habilete_sigle PRIMARY KEY(sigle),
-	CONSTRAINT cc_habilete_sigle CHECK(sigle LIKE '..P'),
+	CONSTRAINT cc_habilete_sigle CHECK(sigle ~ '^..P'),
 	CONSTRAINT cc_habilete_max_energie CHECK(max_energie >= 1 AND max_energie <= 1000)
 );
 
