@@ -28,9 +28,9 @@ VALUES  ('Racing', 'ga0001', 'Jeu de course'),
 		('Tenis', 'ga0003', 'Jeu de tennis');
 		
 INSERT INTO habilete (nom, sigle, max_energie, coef1, coef2, coef3, description, jeu)
-VALUES  ('Invincibilité_temporaire_p', '001', 105.301, 10.90, 40.30, 20.76, 'Devient invincible temporairement', 'ga0001' ),
-		('RAGE_p', '002', 233.333, 10.33,20.33,33.33,'Devient plus fort temporairement', 'ga0002'),
-		('slow_motion_p', '003', 322.232, 11.11,22.22,33.33, 'Ralentie le temp temporairement', 'ga0003');
+VALUES  ('Invincibilité_temporaire_P', '001', 105.301, 10.90, 40.30, 20.76, 'Devient invincible temporairement', 'ga0001' ),
+		('RAGE_P', '002', 233.333, 10.33,20.33,33.33,'Devient plus fort temporairement', 'ga0002'),
+		('slow_motion_P', '003', 322.232, 11.11,22.22,33.33, 'Ralentie le temp temporairement', 'ga0003');
 		
 INSERT INTO item (nom, sigle, probabilite, description, mox, jeu)
 VALUES  ('Propulseur', '001', 0.05, 'augmente la vitesse du joueur', 10000, 'ga0001'),
