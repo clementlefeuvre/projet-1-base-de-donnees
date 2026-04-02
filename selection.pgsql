@@ -23,6 +23,22 @@ SELECT  habilete_avatar.avatar, '[' || habilete.sigle || ' , ' || habilete.nom |
 			ON habilete_avatar.habilete = habilete.sigle
 	WHERE habilete_avatar.avatar LIKE '%*';
 	
+-- 4
+SELECT (SELECT SUM(h.coef1 * POWER(ha.niveau, 2) + h.coef2 * ha.niveau + h.coef3)
+        FROM avatar AS av
+                INNER JOIN habilete_avatar AS ha
+                ON av.nom = ha.avatar
+                INNER JOIN habilete AS h
+                ON ha.habilete = h.sigle
+                WHERE av.nom  LIKE '%')
+                +
+        (SELECT SUM(it.moX)
+            FROM avatar AS av
+                INNER JOIN item_avatar AS ia
+                ON av.nom = ia.avatar
+                INNER JOIN item AS it
+                ON ia.item = it.sigle
+                WHERE av.nom  LIKE '%');
 -- 5
 
 SELECT  capsule_activite.jeu, SUM(capsule_activite.duree)
