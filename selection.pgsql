@@ -33,7 +33,15 @@ SELECT  capsule_activite.jeu, SUM(capsule_activite.duree)
 							FROM avatar
 							WHERE joueur LIKE '%*')
 	GROUP BY jeu
-	ORDER BY capsule_activite.jeu
+	ORDER BY capsule_activite.jeu;
+	
+-- 6
+
+SELECT avatar.joueur ,avatar.nom, item_avatar.quantite 
+  	FROM avatar
+	   INNER JOIN item_avatar
+	   		ON avatar.nom = item_avatar.avatar
+	WHERE item_avatar.quantite > 1;
 
 
 

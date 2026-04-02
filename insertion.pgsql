@@ -41,32 +41,32 @@ VALUES  ('Propulseur', 'I001', 0.05, 'augmente la vitesse du joueur', 10000, 'ga
 		
 INSERT INTO activite(id,joueur,date_debut,duree)
 VALUES  (01, 'alfonso *', '2026-01-23', 500),
-		(02, 'alfonso *', '2026-01-24', 500),
-		(03, 'alfonso *', '2026-01-25', 500),
-		(04, 'alfonso *', '2026-01-26', 500),
-		(05, 'Olivier', '2026-01-26', 900),
-		(06, 'Jacob', '2026-01-26', 900),
-		(07, 'Clément', '2026-01-26', 900);
+		(02, 'alfonso *', '2026-01-24', 5000),
+		(03, 'alfonso *', '2026-01-25', 6000),
+		(04, 'alfonso *', '2026-01-26', 2000),
+		(05, 'Olivier', '2026-01-26', 1300),
+		(06, 'Jacob', '2026-01-26',10000),
+		(07, 'Clément', '2026-01-26', 1400);
 		
 
 INSERT INTO capsule_activite (id,activite, avatar, jeu, duree)
 VALUES  (01, 01,'Aang *', 'ga0003', 250),
 		(02, 01,'Aang *', 'ga0001', 250),
-		(03, 02,'Aang *', 'ga0002', 250),
-		(04, 02,'Roku', 'ga0003', 250),
-		(05, 03,'Aang *', 'ga0001', 250),
-		(06, 03,'Aang *', 'ga0002', 250),
-		(07, 04,'Aang *', 'ga0003', 250),
-		(08, 04,'Zuko', 'ga0001', 250),
+		(03, 02,'Aang *', 'ga0002', 2500),
+		(04, 02,'Roku', 'ga0003', 2500),
+		(05, 03,'Aang *', 'ga0001', 2000),
+		(06, 03,'Aang *', 'ga0002', 4000),
+		(07, 04,'Aang *', 'ga0003', 500),
+		(08, 04,'Zuko', 'ga0001', 1500),
 		(06, 05,'Iroh', 'ga0002', 300),
-		(07, 05,'Iroh', 'ga0003', 300),
+		(07, 05,'Iroh', 'ga0003', 700),
 		(08, 05,'Iroh', 'ga0001', 300),
-		(06, 06,'Carlos Alfonso', 'ga0001', 300),
-		(07, 06,'Carlos Alfonso', 'ga0003', 300),
-		(08, 06,'Carlos Alfonso', 'ga0001', 300),
+		(06, 06,'Carlos Alfonso', 'ga0001', 3000),
+		(07, 06,'Carlos Alfonso', 'ga0003', 2000),
+		(08, 06,'Carlos Alfonso', 'ga0001', 5000),
 		(06, 07,'clem', 'ga0002', 300),
-		(07, 07,'clem', 'ga0001', 300),
-		(08, 07,'clem', 'ga0003', 300);
+		(07, 07,'clem', 'ga0001', 600),
+		(08, 07,'clem', 'ga0003', 500);
 		
 INSERT INTO habilete_avatar (avatar, habilete, date_obtention, niveau)
 VALUES  ('Aang *', '01P',now(), 1),
@@ -74,9 +74,9 @@ VALUES  ('Aang *', '01P',now(), 1),
 		('Iroh', '03P',now(), 1);
 		
 INSERT INTO item_avatar (avatar, item, date_obtention, quantite)
-VALUES  ('Aang *', 'I001', now(), 1),
+VALUES  ('Aang *', 'I001', now(), 3),
 		('Carlos Alfonso', 'I004',now(), 1),
-		('Iroh', 'I005', now(), 1);
+		('Iroh', 'I005', now(), 8);
 		
 INSERT INTO phrase (id, contenu, avatar)
 VALUES  (1,'yip yip!','Aang *'),
