@@ -1,22 +1,22 @@
-ALTER TABLE item_avatar 		
+ALTER TABLE IF EXISTS item_avatar 		
 	DROP CONSTRAINT IF EXISTS fk_item_avatar_item, 
 	DROP CONSTRAINT IF EXISTS fk_item_avatar_avatar;
-ALTER TABLE habilete_avatar 	
+ALTER TABLE IF EXISTS habilete_avatar 	
 	DROP CONSTRAINT IF EXISTS fk_habilete_avatar_habilete,
 	DROP CONSTRAINT IF EXISTS fk_habilete_avatar_avatar;
-ALTER TABLE habilete
+ALTER TABLE IF EXISTS habilete
 	DROP CONSTRAINT IF EXISTS fk_habilete_jeu;
-ALTER TABLE phrase
+ALTER TABLE IF EXISTS phrase
 	DROP CONSTRAINT IF EXISTS fk_phrase_avatar;
-ALTER TABLE avatar
+ALTER TABLE IF EXISTS avatar
 	DROP CONSTRAINT IF EXISTS fk_avatar_joueur;
-ALTER TABLE capsule_activite
+ALTER TABLE IF EXISTS capsule_activite
 	DROP CONSTRAINT IF EXISTS fk_caps_acti_avt,
 	DROP CONSTRAINT IF EXISTS fk_avt_caps_acti,
 	DROP CONSTRAINT IF EXISTS fk_caps_acti_jeu;
-ALTER TABLE activite
+ALTER TABLE IF EXISTS activite
 	DROP CONSTRAINT IF EXISTS fk_acti_joueur;
-ALTER TABLE item
+ALTER TABLE IF EXISTS item
 	DROP CONSTRAINT IF EXISTS fk_item_jeu;
 
 
