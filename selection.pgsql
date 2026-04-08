@@ -98,9 +98,15 @@ SELECT item.nom AS "Item", joueur.alias AS "Propriétaire"
 				ON avatar.joueur = joueur.alias
 			ORDER BY item.nom;
 
-
-
-
+-- 7 : Clément Lefeuvre --> Retourne tous les avatars qui ont plus de 1h de jeu
+-- Fonctionnelle: Oui
+SELECT nom AS "Nom de l'avatar", joueur AS "Joueur propriétaire", SUM(capsule_activite.duree)/60 AS "Temps de jeu"
+	FROM avatar
+		INNER JOIN capsule_activite
+    		ON capsule_activite.avatar = avatar.nom
+	GROUP BY nom
+	HAVING SUM(capsule_activite.duree)/60 > 60
+	ORDER BY SUM(capsule_activite.duree) DESC;
 
 
 

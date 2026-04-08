@@ -82,11 +82,6 @@ INSERT INTO item_avatar (avatar, item, date_obtention, quantite)
 VALUES  ('Aang *', 'I001', now(), 3),
 		('Carlos Alfonso', 'I004',now(), 1),
 		('Iroh', 'I005', now(), 8),
-		('Zuko', 'I002', now(), 1),          -- Zuko reçoit une Épée (I002 existait déjà)
-        ('Zuko', 'I006', now(), 1),          -- Zuko reçoit le Bouclier de bois
-        ('clem', 'I008', now(), 2),          -- clem reçoit 2 Balles explosives
-        ('Roku', 'I010', now(), 1),          -- Roku reçoit la Cape d'invisibilité
-        ('Aang *', 'I007', now(), 5),        -- Aang reçoit 5 Potions de soin
         ('Carlos Alfonso', 'I009', now(), 1);
 		
 INSERT INTO phrase (id, contenu, avatar)
