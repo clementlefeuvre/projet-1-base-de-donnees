@@ -48,10 +48,11 @@ SELECT (SELECT SUM(h.coef1 * POWER(ha.niveau, 2) + h.coef2 * ha.niveau + h.coef3
                 ON av.nom = ia.avatar
                 INNER JOIN item AS it
                 ON ia.item = it.sigle
-                WHERE av.nom  LIKE '%');
+                WHERE av.nom  LIKE '%')
+		AS "Valeur totale de l'avatar principal";
 -- 5  Pour le joueur principal, donnez le nombre total d’heures passées dans chaque jeu joué.
 -- Fonctionnelle : oui
-SELECT  capsule_activite.jeu, SUM(capsule_activite.duree)
+SELECT  capsule_activite.jeu, ROUND(SUM(capsule_activite.duree/60)/60.0, 2) AS "Heures jouées"
 	FROM avatar
 		INNER JOIN capsule_activite
 			ON capsule_activite.avatar = avatar.nom
@@ -64,15 +65,15 @@ SELECT  capsule_activite.jeu, SUM(capsule_activite.duree)
 -- 6 Donnez la liste de tous les avatars qui possèdent plus de 1 item : nom du joueur, nom de l’avatar
    --et nombre d’items
 -- Fonctionnelle : oui
-SELECT avatar.joueur ,avatar.nom, item_avatar.quantite 
+SELECT avatar.joueur ,avatar.nom AS "Nom de l'avatar", item_avatar.quantite AS "Quantité d'items"
   	FROM avatar
 	   INNER JOIN item_avatar
 	   		ON avatar.nom = item_avatar.avatar
 	WHERE item_avatar.quantite > 1;
 
--- 7 : Olivier Simoneau --> retourne le joueur qui à jouer au plus de jeu
+-- 7 : Olivier Simoneau --> retourne le joueur qui a joué au plus de jeux différents
 -- Fonctionnelle : oui
-SELECT joueur.alias AS "Joueur", COUNT(DISTINCT capsule_activite.jeu)
+SELECT joueur.alias AS "Joueur", COUNT(DISTINCT capsule_activite.jeu) AS "Nombre de jeux joués"
 		FROM joueur
 			INNER JOIN activite
 				ON activite.joueur = joueur.alias
@@ -100,12 +101,12 @@ SELECT item.nom AS "Item", joueur.alias AS "Propriétaire"
 
 -- 7 : Clément Lefeuvre --> Retourne tous les avatars qui ont plus de 1h de jeu
 -- Fonctionnelle: Oui
-SELECT nom AS "Nom de l'avatar", joueur AS "Joueur propriétaire", SUM(capsule_activite.duree)/60 AS "Temps de jeu"
+SELECT nom AS "Nom de l'avatar", joueur AS "Joueur propriétaire", ROUND(SUM(capsule_activite.duree/60.0)/60.0, 2) AS "Heures de jeu"
 	FROM avatar
 		INNER JOIN capsule_activite
     		ON capsule_activite.avatar = avatar.nom
 	GROUP BY nom
-	HAVING SUM(capsule_activite.duree)/60 > 60
+	HAVING SUM(capsule_activite.duree/60.0)/60.0 > 1
 	ORDER BY SUM(capsule_activite.duree) DESC;
 
 
