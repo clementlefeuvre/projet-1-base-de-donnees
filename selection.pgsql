@@ -59,6 +59,21 @@ SELECT avatar.joueur ,avatar.nom, item_avatar.quantite
 	   		ON avatar.nom = item_avatar.avatar
 	WHERE item_avatar.quantite > 1;
 
+-- 7 : Olivier Simoneau --> retourne le joueur qui à jouer au plus de jeu
+SELECT joueur.alias AS "Joueur", COUNT(DISTINCT capsule_activite.jeu)
+		FROM joueur
+			INNER JOIN activite
+				ON activite.joueur = joueur.alias
+			INNER JOIN capsule_activite 
+				ON capsule_activite.activite = activite.id
+			INNER JOIN avatar
+				ON avatar.nom = capsule_activite.avatar
+			INNER JOIN jeu
+				ON jeu.sigle = capsule_activite.jeu
+		GROUP BY joueur.alias
+		ORDER BY COUNT(DISTINCT capsule_activite.jeu) DESC
+		LIMIT 1
+		
 
 
 
