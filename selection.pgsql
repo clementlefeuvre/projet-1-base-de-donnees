@@ -1,17 +1,26 @@
 SELECT * FROM capsule_activite;
--- 1
+-- 1  Donnez la liste de tous les joueurs, on désire : alias, courriel, date d’inscription. Le tout trié par
+    --date d’inscription (croissant).
+-- Fonctionnelle : oui
 
 SELECT alias, courriel, date_inscription
 	FROM joueur
 	ORDER BY date_inscription;
--- 2
+-- 2  Donnez la liste des avatars d’un joueur quelconque (pour l’exemple, prendre le joueur principal),
+    --en donnant : nom, la couleur préférée transformée en trois composantes rouge, vert, bleu (dans
+    --une seule colonne selon ce format : « (127, 0, 255) »), date de création suivant le format
+    --2000 | 12 | 25, le nombre de moX.
+-- Fonctionnelle : oui
 SELECT  nom, 
 		((couleur1 >> 16) & 255) || ',' || ((couleur1 >> 8) & 255) || ',' || (couleur1 & 255) AS "couleur préférer",
 		to_char(date_creation, 'DD | MM | YYYY')
 	FROM avatar
 	WHERE nom LIKE '%*';
 	
--- 3
+-- 3  Pour l’avatar principal, donnez toutes les habiletés qu’il possède en présentant : le sigle et le nom
+    --entre crochets dans la même colonne, la date d’obtention, le niveau courant, la valeur en moX
+    --du niveau courant et le coût en moX pour acheter le prochain niveau.
+-- Fonctionnelle : oui
 SELECT  habilete_avatar.avatar, '[' || habilete.sigle || ' , ' || habilete.nom || ']' AS Habileté,
 		date_obtention,
 		niveau,
@@ -23,7 +32,8 @@ SELECT  habilete_avatar.avatar, '[' || habilete.sigle || ' , ' || habilete.nom |
 			ON habilete_avatar.habilete = habilete.sigle
 	WHERE habilete_avatar.avatar LIKE '%*';
 	
--- 4
+-- 4 Pour l’avatar principal, donnez sa valeur totale : pour les habilités on considère le niveau et pour
+   --les items on considère la quantité.
 SELECT (SELECT SUM(h.coef1 * POWER(ha.niveau, 2) + h.coef2 * ha.niveau + h.coef3)
         FROM avatar AS av
                 INNER JOIN habilete_avatar AS ha
@@ -39,8 +49,8 @@ SELECT (SELECT SUM(h.coef1 * POWER(ha.niveau, 2) + h.coef2 * ha.niveau + h.coef3
                 INNER JOIN item AS it
                 ON ia.item = it.sigle
                 WHERE av.nom  LIKE '%');
--- 5
-
+-- 5  Pour le joueur principal, donnez le nombre total d’heures passées dans chaque jeu joué.
+-- Fonctionnelle : oui
 SELECT  capsule_activite.jeu, SUM(capsule_activite.duree)
 	FROM avatar
 		INNER JOIN capsule_activite
@@ -51,8 +61,9 @@ SELECT  capsule_activite.jeu, SUM(capsule_activite.duree)
 	GROUP BY jeu
 	ORDER BY capsule_activite.jeu;
 	
--- 6
-
+-- 6 Donnez la liste de tous les avatars qui possèdent plus de 1 item : nom du joueur, nom de l’avatar
+   --et nombre d’items
+-- Fonctionnelle : oui
 SELECT avatar.joueur ,avatar.nom, item_avatar.quantite 
   	FROM avatar
 	   INNER JOIN item_avatar
@@ -60,6 +71,7 @@ SELECT avatar.joueur ,avatar.nom, item_avatar.quantite
 	WHERE item_avatar.quantite > 1;
 
 -- 7 : Olivier Simoneau --> retourne le joueur qui à jouer au plus de jeu
+-- Fonctionnelle : oui
 SELECT joueur.alias AS "Joueur", COUNT(DISTINCT capsule_activite.jeu)
 		FROM joueur
 			INNER JOIN activite
@@ -75,8 +87,8 @@ SELECT joueur.alias AS "Joueur", COUNT(DISTINCT capsule_activite.jeu)
 		LIMIT 1;
 		
 -- 7 : Jacob Dury --> Retourne les propriétaire de chaque items
-
-SELECT item.nom, joueur.alias
+-- Fonctionnelle : oui
+SELECT item.nom AS "Item", joueur.alias AS "Propriétaire"
 		FROM item
 			INNER JOIN item_avatar AS ita
 				ON item.sigle = ita.item
@@ -84,7 +96,7 @@ SELECT item.nom, joueur.alias
 				ON ita.avatar = avatar.nom
 			INNER JOIN joueur
 				ON avatar.joueur = joueur.alias
-			ORDER BY joueur.alias;
+			ORDER BY item.nom;
 
 
 

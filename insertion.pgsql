@@ -37,7 +37,12 @@ VALUES  ('Propulseur', 'I001', 0.05, 'augmente la vitesse du joueur', 10000, 'ga
 		('Épé', 'I002', 0.09, 'augmente les dégats du joueur', 5000, 'ga0002'),
 		('Raquette en or', 'I003', 0.01, 'augmente la valeur des objet vendu', 100000, 'ga0003'),
 		('Boules de feu', 'I004', 0.30, 'Le joueur peut lancer des boules de feu', 10000, 'ga0002'),
-		('Spike ball', 'I005', 0.20, 'Blesse le joueur lors de son obtention', 1, 'ga0003');
+		('Spike ball', 'I005', 0.20, 'Blesse le joueur lors de son obtention', 1, 'ga0003'),
+		('Bouclier de bois', 'I006', 0.15, 'Réduit les dégats reçus de 10%', 2000, 'ga0002'),
+        ('Potion de soin', 'I007', 0.25, 'Restaure 50 PV', 500, 'ga0002'),
+        ('Balles explosives', 'I008', 0.05, 'Les balles créent une petite explosion au rebond', 15000, 'ga0003'),
+        ('Bandeau de concentration', 'I009', 0.12, 'Augmente la précision des coups', 3500, 'ga0003'),
+        ('Cape d''invisibilité', 'I010', 0.02, 'Rend le joueur difficile à voir', 25000, 'ga0002');
 		
 INSERT INTO activite(id,joueur,date_debut,duree)
 VALUES  (01, 'alfonso *', '2026-01-23', 500),
@@ -76,7 +81,13 @@ VALUES  ('Aang *', '01P',now(), 1),
 INSERT INTO item_avatar (avatar, item, date_obtention, quantite)
 VALUES  ('Aang *', 'I001', now(), 3),
 		('Carlos Alfonso', 'I004',now(), 1),
-		('Iroh', 'I005', now(), 8);
+		('Iroh', 'I005', now(), 8),
+		('Zuko', 'I002', now(), 1),          -- Zuko reçoit une Épée (I002 existait déjà)
+        ('Zuko', 'I006', now(), 1),          -- Zuko reçoit le Bouclier de bois
+        ('clem', 'I008', now(), 2),          -- clem reçoit 2 Balles explosives
+        ('Roku', 'I010', now(), 1),          -- Roku reçoit la Cape d'invisibilité
+        ('Aang *', 'I007', now(), 5),        -- Aang reçoit 5 Potions de soin
+        ('Carlos Alfonso', 'I009', now(), 1);
 		
 INSERT INTO phrase (id, contenu, avatar)
 VALUES  (1,'yip yip!','Aang *'),
