@@ -72,8 +72,21 @@ SELECT joueur.alias AS "Joueur", COUNT(DISTINCT capsule_activite.jeu)
 				ON jeu.sigle = capsule_activite.jeu
 		GROUP BY joueur.alias
 		ORDER BY COUNT(DISTINCT capsule_activite.jeu) DESC
-		LIMIT 1
+		LIMIT 1;
 		
+-- 7 : Jacob Dury --> Retourne les propriétaire de chaque items
+
+SELECT item.nom, joueur.alias
+		FROM item
+			INNER JOIN item_avatar AS ita
+				ON item.sigle = ita.item
+			INNER JOIN avatar
+				ON ita.avatar = avatar.nom
+			INNER JOIN joueur
+				ON avatar.joueur = joueur.alias
+			ORDER BY joueur.alias;
+
+
 
 
 
