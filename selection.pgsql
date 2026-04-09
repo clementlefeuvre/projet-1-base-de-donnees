@@ -1,4 +1,4 @@
-SELECT * FROM capsule_activite;
+
 -- 1  Donnez la liste de tous les joueurs, on désire : alias, courriel, date d’inscription. Le tout trié par
     --date d’inscription (croissant).
 -- Fonctionnelle : oui
@@ -13,7 +13,7 @@ SELECT alias, courriel, date_inscription
 -- Fonctionnelle : oui
 SELECT  nom, 
 		((couleur1 >> 16) & 255) || ',' || ((couleur1 >> 8) & 255) || ',' || (couleur1 & 255) AS "couleur préférer",
-		to_char(date_creation, 'DD | MM | YYYY')
+		to_char(date_creation, 'DD | MM | YYYY') AS "date de création"
 	FROM avatar
 	WHERE nom LIKE '%*';
 	

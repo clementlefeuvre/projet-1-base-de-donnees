@@ -1,12 +1,3 @@
-SELECT * FROM joueur;
-SELECT * FROM avatar;
-SELECT * FROM capsule_activite;
-SELECT * FROM habilete;
-
-SELECT * FROM habilete_avatar;
-SELECT * FROM item_avatar;
-SELECT * FROM phrase;
-
 
 INSERT INTO joueur (alias, courriel, mot_de_passe, genre, date_inscription, date_naissance, statut)
 VALUES ('alfonso *', 'carlo17@gmail.com', 'xxgzuqta$', 'homme_cis', now(), '1997-06-20', 'payant'),
