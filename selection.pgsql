@@ -48,7 +48,7 @@ SELECT (SELECT SUM(h.coef1 * POWER(ha.niveau, 2) + h.coef2 * ha.niveau + h.coef3
                 ON av.nom = ia.avatar
                 INNER JOIN item AS it
                 ON ia.item = it.sigle
-                WHERE av.nom  LIKE '%')
+                WHERE av.nom  LIKE '%*')
 		AS "Valeur totale de l'avatar principal";
 -- 5  Pour le joueur principal, donnez le nombre total d’heures passées dans chaque jeu joué.
 -- Fonctionnelle : oui
