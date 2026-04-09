@@ -42,7 +42,7 @@ SELECT (SELECT SUM(h.coef1 * POWER(ha.niveau, 2) + h.coef2 * ha.niveau + h.coef3
                 ON ha.habilete = h.sigle
                 WHERE av.nom  LIKE '%')
                 +
-        (SELECT SUM(it.moX)
+        (SELECT SUM(it.moX * ia.quantite)
             FROM avatar AS av
                 INNER JOIN item_avatar AS ia
                 ON av.nom = ia.avatar
