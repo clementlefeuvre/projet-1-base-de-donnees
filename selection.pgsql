@@ -111,3 +111,19 @@ SELECT nom AS "Nom de l'avatar", joueur AS "Joueur propriétaire", ROUND(SUM(cap
 
 
 
+-- 8 : Carlos Torres --> retourne l'alias d'avatar, le nombre d'items, la quantité 
+--                       total d'items et le nombre d'avatars pour chaque joueur.
+--                       trié par ordre décroissant selon la quantité total d'items
+SELECT joueur.alias AS "Joueur", 
+    COUNT(DISTINCT item_avatar.item) AS "Nbr d'items", 
+    SUM(item_avatar.quantite) AS "Quantité total", 
+    COUNT(DISTINCT avatar.nom) AS "Nbr d'avatars"
+        FROM joueur
+            INNER JOIN avatar
+                ON avatar.joueur = joueur.alias
+            INNER JOIN item_avatar
+                ON item_avatar.avatar = avatar.nom
+            INNER JOIN item
+                ON item.sigle = item_avatar.item
+            GROUP BY joueur.alias 
+            ORDER BY SUM(item_avatar.quantite) DESC;
